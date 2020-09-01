@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <script crossorgin src="https://unpkg.com/react@16/umd/react.development.js"></script><!--배포할떄는 production으로 바꾸면 됨.-->
+    <script crossorgin src="https://unpkg.com/react-dom@16/umd/react-dom.development.js"></script> <!--document-->
+    <script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
+    <meta charset="utf-8">
+    <title></title>
+  </head>
+  <body>
+    <div id="root"></div>
+    <script type="text/babel">
+      class GuGuDan extends React.Component { //render 사용 못함. class 형태를 Component 형태로.
+        constructor(props){
+        super(props);
+        this.state = {  //변경 될 값을 설정.
+          first: Math.ceil(Math.random()*9),
+          second: Math.ceil(Math.random()*9),
+          value: '',  //input 값
+          result: '', // 맞는지 틀리는지.
+        };
+      }
+
+      render(){ //태그 , render가 없으면 안됨. 계속 호출된다.
+        console.log('rendering');
+        return (
+        <div>
+        <div>{this.state.first}곱하기{this.state.second}는?</div>  //중괄호 안에는 자바스크립트 쓸수 있다.
+        <form>
+          <input type="number" value={this.state.value} onChange={(e)=> {this.setState({value: e.target.value})}} />
+        <div>{this.state.result}</div>
+        </div>
+        );
+      }
+    }
+    </script>
+    <script type="text/babel">
+      ReactDOM.render(<GuGuDan />, document.querySelector('#root'));
+    </script>
+
+  </body>
+</html>

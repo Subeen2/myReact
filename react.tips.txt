@@ -1,0 +1,33 @@
+react : 
+react-dom : react를 문서에 옮긴다 
+json : 데이터 교환을 위해
+ajax는 하나의 방법 : 비동기 json형태로 보낸다. (객체 표기)
+e는 변수 ? 이벤트 객체다.
+props : 태그 형태의 속성 
+=()=>{
+} : bind 피하기 위해
+setState 는 비동기
+
+useEffect , memo, useCallback
+reducer : state관리
+shouldComponentUpdate
+componentWillUnmount
+pure
+componentDidmount
+componentDidUpdate
+
+중괄호 안에는 javascript 쓸수 있다고 생각.
+
+componentDidMount : 실행되기 직전에 rendering
+컴포넌트  = class
+
+class 는 상태 바뀌면 render 만 실행
+hooks는 상태 변하면 전체다 실행
+
+purecomponent == Memo (최종 컴포넌트 )
+
+useCallback : 이전의 함수를 기억한다.
+memo 도 rendering 막는것이다
+
+state : 상태
+dispatch : 전달 (컴포넌트 연결)
