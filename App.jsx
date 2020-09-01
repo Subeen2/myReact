@@ -1,32 +1,59 @@
-import React from 'react';
-import Home from './Home';
-import {Route, Link} from 'react-router-dom';
-import About from './About';
-import Profile from './Profile';
-import Profiles from './Profiles';
-import HistorySample from './HistorySample';
+import React, {useCallback} from 'react';
+import TodoTemplate from './Component/TodoTemplate';
+import TodoInsert from './Component/TodoInsert';
+import TodoList from './Component/TodoList';
 
-const App=()=>{
+import './App.css';
+
+const App =()=>{
+  const [todo, setTodo] = React.useState([
+    {
+      id: 1,
+      text: 'hi',
+      checked: false,
+    },
+    {
+      id: 2,
+      text: 'hi2',
+      checked: false,
+    },
+    {
+      id: 3,
+      text: 'hi22',
+      checked: false,
+    },
+  ]);
+
+  const nextId = React.useRef(4);
+
+  const Insert =(text)=>{
+    const addTodo={
+      id: nextId.current,
+      text,
+      checked: false,
+    }
+    setTodo(todo.concat(addTodo));
+    nextId.current += 1;
+  }
+
+  const remove=useCallback((id)=>{
+    setTodo(todo.filter(addTodo=>addTodo.id !== id));
+  },[todo]);
+
+  const Toggle=(id)=>{
+    setTodo(
+      todo.map((addTodo)=>
+        id === addTodo.id ? {...addTodo, checked: !addTodo.checked} : addTodo,
+      )
+    );
+  }
+
   return(
     <div>
-      <ul>
-        <li>
-          <Link to="/">홈으로</Link>
-        </li>
-        <li>
-          <Link to="/About" >정보</Link>  {/* 선택 */}
-        </li>
-        <li>
-          <Link to="/Profiles">정보들</Link>
-        </li>
-        <li>
-          <Link to="/history">홈페이지 예제</Link>
-        </li>
-      </ul>
-      {/* <Route path="/" component={Home} exact /> */}
-      <Route path="/About" component={About} /> {/* 필수 */}
-      <Route path="/Profiles" component={Profiles} />
-      <Route path="/history" component={HistorySample} />
+      <TodoTemplate>
+        <TodoInsert onInsert={Insert}></TodoInsert>
+        <TodoList todo={todo} onRemove={remove} onToggle={Toggle}></TodoList>
+      </TodoTemplate>
     </div>
   );
 }
